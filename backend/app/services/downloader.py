@@ -48,6 +48,7 @@ class DownloaderService:
             'nocheckcertificate': True,
             'http_headers': headers,
             'referer': 'https://www.youtube.com/',
+            'extractor_args': {'youtube': ['client=ANDROID,IOS']},
         }
         
         try:
@@ -224,6 +225,7 @@ class DownloaderService:
             'nocheckcertificate': True,
             'http_headers': headers,
             'referer': 'https://www.youtube.com/',
+            'extractor_args': {'youtube': ['client=ANDROID,IOS']},
         }
 
         # Build hook to update state
