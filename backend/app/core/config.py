@@ -23,7 +23,8 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: Annotated[
         List[str], BeforeValidator(parse_cors_origins)
     ] = ["http://localhost:5173", "https://tube-fetch-ai.vercel.app"]
-
+    
+    YOUTUBE_COOKIES: str | None = None
 
     DOWNLOAD_DIR: Path = DOWNLOADS_DIR
 

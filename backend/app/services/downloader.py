@@ -6,7 +6,15 @@ import threading
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import yt_dlp
+import tempfile
 from app.core.config import settings
+
+# Setup cookies for yt-dlp to bypass bot detection on Render
+COOKIE_FILE = None
+if settings.YOUTUBE_COOKIES:
+    fd, COOKIE_FILE = tempfile.mkstemp(suffix='.txt', prefix='yt_cookies_')
+    with os.fdopen(fd, 'w') as f:
+        f.write(settings.YOUTUBE_COOKIES.replace('\\n', '\n'))
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +58,9 @@ class DownloaderService:
             'referer': 'https://www.youtube.com/',
             'extractor_args': {'youtube': ['client=ANDROID,IOS']},
         }
+        
+        if COOKIE_FILE:
+            ydl_opts['cookiefile'] = COOKIE_FILE
         
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -227,6 +238,9 @@ class DownloaderService:
             'referer': 'https://www.youtube.com/',
             'extractor_args': {'youtube': ['client=ANDROID,IOS']},
         }
+        
+        if COOKIE_FILE:
+            ydl_opts['cookiefile'] = COOKIE_FILE
 
         # Build hook to update state
         def progress_hook(d):
