@@ -75,16 +75,17 @@ export function DownloadProgress({ job, onPause, onResume, onCancel, onDownloadF
 
       {/* Actions */}
       <div className="flex gap-lg">
-        {isCompleted && job.downloadUrl && (
+        {isCompleted && (
           <Button
             variant="primary"
-            size="lg"
+            size="md"
             onClick={onDownloadFile}
             leftIcon={<span className="material-symbols-outlined">download</span>}
           >
-            Save File
+            Save to Device
           </Button>
         )}
+
         {!isCompleted && !isFailed && (
           <>
             <Button

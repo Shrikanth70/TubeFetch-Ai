@@ -14,11 +14,11 @@ export function VideoPreviewCard({ metadata, className = '' }) {
       className={`flex flex-col gap-md text-left ${className}`}
     >
       {/* Thumbnail */}
-      <div className="relative aspect-video rounded-xl overflow-hidden glass-surface shadow-soft group">
+      <div className="relative aspect-video rounded-xl overflow-hidden glass-surface shadow-soft group p-3">
         <img
           src={metadata.thumbnailUrl}
           alt={metadata.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain rounded-lg bg-black/5"
           loading="lazy"
         />
         {/* Hover overlay + play button */}

@@ -35,6 +35,10 @@ export function DownloadStatusPage() {
         if (progress >= 100 && intervalRef.current) {
           clearInterval(intervalRef.current);
           toast.success('Download complete!');
+          const a = document.createElement('a');
+          a.href = 'data:text/plain;charset=utf-8,Mock Download';
+          a.download = 'mock_video.mp4';
+          a.click();
         }
       }, POLL_INTERVAL_MS);
       return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
@@ -47,7 +51,15 @@ export function DownloadStatusPage() {
         setJob(updatedJob);
         if (updatedJob.status === 'completed' || updatedJob.status === 'failed') {
           if (intervalRef.current) clearInterval(intervalRef.current);
-          if (updatedJob.status === 'completed') toast.success('Download complete!');
+          if (updatedJob.status === 'completed') {
+            toast.success('Download complete!');
+            if (updatedJob.downloadUrl) {
+              const a = document.createElement('a');
+              a.href = updatedJob.downloadUrl;
+              a.download = updatedJob.fileName || 'download';
+              a.click();
+            }
+          }
           else toast.error(updatedJob.errorMessage ?? 'Download failed.');
         }
       } catch (err) {

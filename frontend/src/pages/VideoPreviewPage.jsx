@@ -3,8 +3,6 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { VideoPreviewCard } from '@/features/download/components/VideoPreviewCard';
 import { FormatSelector } from '@/features/download/components/FormatSelector';
-import { RecentDownloadsSidebar } from '@/features/download/components/RecentDownloadsSidebar';
-import { AiInsightsSection } from '@/features/download/components/AiInsightsSection';
 import { SkeletonVideoPreview } from '@/components/ui/SkeletonLoader';
 import { Footer } from '@/components/layout/Footer';
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
@@ -86,8 +84,8 @@ export function VideoPreviewPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 py-lg md:py-xl pt-24 pb-20 md:pb-0">
+    <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
+      <main className="flex-grow w-full max-w-container-max mx-auto px-4 md:px-8 pt-24 pb-8 flex flex-col justify-center origin-top scale-[0.90] md:scale-90">
         {isLoadingMetadata ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
             <div className="lg:col-span-7">
@@ -99,7 +97,7 @@ export function VideoPreviewPage() {
           </div>
         ) : metadata ? (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl items-center">
               {/* Left: Video Preview */}
               <div className="lg:col-span-7 flex flex-col gap-md">
                 <VideoPreviewCard metadata={metadata} />
@@ -114,15 +112,11 @@ export function VideoPreviewPage() {
                   onDownload={handleDownload}
                   isDownloading={isDownloading}
                 />
-                <RecentDownloadsSidebar />
               </div>
             </div>
-            {/* AI Insights */}
-            <AiInsightsSection />
           </>
         ) : null}
       </main>
-      <Footer />
       <MobileBottomNav />
     </div>
   );
