@@ -1,5 +1,7 @@
 # TubeFetch AI
 
+(Note: For study purpose only.)
+
 TubeFetch AI is a powerful, modern web application for extracting and downloading high-fidelity video and audio from various platforms. It features a responsive React frontend and a fast FastAPI backend powered by yt-dlp.
 
 ## Features
